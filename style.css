@@ -1,0 +1,546 @@
+/* ==========================================================================
+   1. ROOT VARIABLES & GLOBAL SETUP
+   ========================================================================== */
+:root {
+    --bg-main: #0a0a0c;
+    --bg-card: rgba(20, 20, 25, 0.7);
+    --border-neutral: rgba(255, 255, 255, 0.05);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #b3b9c9;
+
+    /* Division Specific Themes */
+    --pc-red: #ff3344;
+    --console-green: #00ff66;
+    --discord-blurple: #5865F2;
+
+    --content-width: 850px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 120px 24px 60px 24px;
+    position: relative;
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; 
+    
+    
+    background: 
+        radial-gradient(circle at 15% 35%, rgba(255, 51, 68, 0.12) 0%, transparent 45%),
+        radial-gradient(circle at 85% 35%, rgba(0, 255, 102, 0.06) 0%, transparent 45%),
+        radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), 
+        linear-gradient(180deg, #13151a 0%, #0c0d10 100%);
+        
+    background-color: #0c0d10;
+    background-size: auto, auto, 28px 28px, auto;
+    
+    
+    transform: translate3d(0, 0, 0); 
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================================================
+   2. LAYOUT CONTAINERS & SYSTEM RHYTHM
+   ========================================================================== */
+.wrapper {
+    width: 100%;
+    max-width: var(--content-width);
+    display: flex;
+    flex-direction: column;
+    gap: 140px; /* Increased from 100px for maximum breathing room */
+}
+
+/* Structural setup for content wrapper blocks */
+.wrapper > section, 
+.wrapper > header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative; /* Essential anchor point for automated dividers */
+}
+
+/* Creates a perfect landing zone buffer so the floating navbar never overlaps headings */
+.content-section {
+    scroll-margin-top: 130px; 
+}
+
+/* Eliminates extra trailing text margins to stop compression bugs */
+.wrapper > section > *:last-child,
+.wrapper > header > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Automated Symmetrical Divider Engine */
+.content-section::before {
+    content: "";
+    position: absolute;
+    top: -70px; /* Shifted to exactly half of 140px to stay perfectly dead-centered */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY HIERARCHY
+   ========================================================================== */
+h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+    background: linear-gradient(180deg, #ffffff 40%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   4. HERO SECTION (Full-Screen Cinematic Fold)
+   ========================================================================== */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Keeps content top-aligned to visually connect with the nav */
+    text-align: center;
+    min-height: 75vh;            /* Balanced viewport height to hint at scrolling content below */
+    padding-top: 10vh;           /* Elegant, dynamic spacing from the floating dock */
+    padding-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.crew-logo {
+    width: 160px;
+    height: auto;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 12px rgba(0, 255, 102, 0.5)); 
+    animation: eyeGlow 4s ease-in-out infinite; 
+    transition: filter 0.3s ease;
+}
+
+.crew-logo:hover {
+    filter: drop-shadow(0 0 25px rgba(0, 255, 102, 0.9));
+}
+
+/* Symmetrical breathing cycle for the cat eye */
+@keyframes eyeGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 22px rgba(0, 255, 102, 0.75));
+    }
+}
+
+.hero-tagline {
+    font-size: 1.15rem;
+    max-width: 580px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 32px;
+}
+
+.section-subtitle {
+    margin-top: -8px; 
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   5. RULES COMPONENT
+   ========================================================================== */
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    width: 100%;
+}
+
+.rule-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-neutral);
+    border-radius: 16px;
+    padding: 28px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.rule-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+}
+
+.rule-number {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--console-green);
+    background: rgba(0, 255, 102, 0.1);
+    padding: 2px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+}
+
+.rule-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0;
+}
+
+.rule-card ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rule-card li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 18px;
+}
+
+.rule-card li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.ban-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--pc-red);
+    background: rgba(255, 51, 68, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 4px;
+    border: 1px solid rgba(255, 51, 68, 0.2);
+}
+
+/* ==========================================================================
+   6. SPLIT CARD MATRIX (DIVISIONS)
+   ========================================================================== */
+.split-layout {
+    display: flex;
+    gap: 28px;
+    width: 100%;
+}
+
+.division-card {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border-neutral);
+    border-radius: 20px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(12px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    transition: color 0.25s ease;
+}
+
+.division-card p {
+    font-size: 0.98rem;
+    flex-grow: 1;
+}
+
+/* PC Specific Context */
+.division-card:has(.fa-desktop) {
+    border-bottom: 3px solid var(--pc-red);
+}
+
+.division-card:has(.fa-desktop) .card-icon {
+    color: var(--pc-red);
+}
+
+.division-card:has(.fa-desktop):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(255, 51, 68, 0.15);
+    border-color: rgba(255, 51, 68, 0.3);
+}
+
+/* Console Specific Context */
+.division-card:has(.fa-gamepad) {
+    border-bottom: 3px solid var(--console-green);
+}
+
+.division-card:has(.fa-gamepad) .card-icon {
+    color: var(--console-green);
+}
+
+.division-card:has(.fa-gamepad):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 255, 102, 0.12);
+    border-color: rgba(0, 255, 102, 0.3);
+}
+
+/* ==========================================================================
+   7. UI BUTTON COMPONENTS
+   ========================================================================== */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #ffffff;
+    color: #000000;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.btn-discord {
+    background: var(--discord-blurple);
+    color: #ffffff;
+}
+
+.btn-discord:hover {
+    background: #4752C4;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   8. MISC & UTILITIES (SCROLLBAR, FOOTER)
+   ========================================================================== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 2px solid var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.site-footer {
+    text-align: center;
+    margin-top: 40px;       
+    padding-bottom: 40px;   
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   9. FLOATING PILL NAVIGATION DOCK (SCROLLING)
+   ========================================================================== */
+.navbar {
+    position: absolute;  
+    top: 32px;              
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Premium Glassmorphism Specs */
+    background: rgba(18, 19, 23, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    padding: 10px 12px 10px 28px;
+    
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    width: max-content;
+}
+
+.nav-brand {
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--text-primary);
+    letter-spacing: 1.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-primary);
+}
+
+/* Polished Integrated Call-to-Action */
+.nav-links .nav-cta {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-links .nav-cta:hover {
+    background: var(--text-primary);
+    color: var(--bg-main);
+    border-color: var(--text-primary);
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+}
+
+/* ==========================================================================
+   10. GLOBAL RESPONSIVE MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 768px) {
+    .rules-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .split-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    body {
+        padding: 100px 16px 40px 16px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .navbar {
+        top: 16px;
+        gap: 20px;
+        padding: 8px 10px 8px 20px;
+    }
+    
+    .nav-links {
+        gap: 16px;
+    }
+
+    .wrapper {
+        gap: 90px; 
+    }
+
+    .content-section::before {
+        top: -45px; 
+    }
+}
+
+
+/* ==========================================================================
+   11. LINK SNAPPING TUNING
+   ========================================================================== */
+#about {
+    /* Pushes the heading down into the screen's visual sweet spot ONLY when jumping via the button, 
+       keeping the actual layout spacing perfectly uniform with the rest of the site */
+    scroll-margin-top: 22vh; 
+}
