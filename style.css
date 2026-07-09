@@ -71,7 +71,8 @@ body::before {
     max-width: var(--content-width);
     display: flex;
     flex-direction: column;
-    gap: 140px; /* Increased from 100px for maximum breathing room */
+    gap: 140px; 
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Structural setup for content wrapper blocks */
@@ -546,6 +547,20 @@ p {
 }
 
 
+
+/* ==========================================================================
+   12. ENTRANCE ANIMATION ENGINE
+   ========================================================================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 
 
