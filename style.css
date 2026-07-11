@@ -494,6 +494,24 @@ p {
 /* ==========================================================================
    10. GLOBAL RESPONSIVE MEDIA QUERIES
    ========================================================================== */
+
+/* Tier 1: Tablets & Small Laptops (e.g., iPads in Landscape/Portrait)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    body {
+        /* Injects the necessary side breathing room to prevent edge bleed */
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .wrapper {
+        /* Maintains an elegant, spaced-out rhythm between main landing sections */
+        gap: 110px; 
+    }
+}
+
+/* Tier 2: Smaller Tablets & Cross-over Viewports
+   ========================================================================== */
 @media (max-width: 768px) {
     .rules-grid {
         grid-template-columns: 1fr;
@@ -506,7 +524,9 @@ p {
     }
 
     body {
-        padding: 100px 16px 40px 16px;
+        /* Retains your layout framework but updates side padding to 32px 
+           to keep tablet containers looking perfectly centered and framed */
+        padding: 100px 32px 40px 32px;
     }
 
     h1 {
@@ -533,6 +553,30 @@ p {
 
     .content-section::before {
         top: -45px; 
+    }
+}
+
+/* Tier 3: Mobile Viewports (Smartphones)
+   ========================================================================== */
+@media (max-width: 480px) {
+    body {
+        /* Drops down to your original 16px padding here so text has 
+           maximum horizontal space on narrow phone screens */
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .wrapper {
+        /* Snugs up layout sections beautifully for single-thumb scrolling */
+        gap: 65px; 
+    }
+    
+    h1 {
+        font-size: 2.1rem;
+    }
+    
+    h2 {
+        font-size: 1.55rem;
     }
 }
 
