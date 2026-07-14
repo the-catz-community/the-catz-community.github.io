@@ -2,6 +2,8 @@
    1. ROOT VARIABLES & GLOBAL SETUP
    ========================================================================== */
 :root {
+    color-scheme: dark;
+    
     --bg-main: #0a0a0c;
     --bg-card: rgba(20, 20, 25, 0.7);
     --border-neutral: rgba(255, 255, 255, 0.05);
@@ -38,7 +40,6 @@ body {
     position: relative;
 }
 
-
 body::before {
     content: "";
     position: fixed;
@@ -48,7 +49,6 @@ body::before {
     height: 100%;
     z-index: -1; 
     
-    
     background: 
         radial-gradient(circle at 15% 35%, rgba(255, 51, 68, 0.12) 0%, transparent 45%),
         radial-gradient(circle at 85% 35%, rgba(0, 255, 102, 0.06) 0%, transparent 45%),
@@ -57,7 +57,6 @@ body::before {
         
     background-color: #0c0d10;
     background-size: auto, auto, 28px 28px, auto;
-    
     
     transform: translate3d(0, 0, 0); 
     -webkit-transform: translate3d(0, 0, 0);
@@ -75,31 +74,27 @@ body::before {
     animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-/* Structural setup for content wrapper blocks */
 .wrapper > section, 
 .wrapper > header {
     display: flex;
     flex-direction: column;
     width: 100%;
-    position: relative; /* Essential anchor point for automated dividers */
+    position: relative;
 }
 
-/* Creates a perfect landing zone buffer so the floating navbar never overlaps headings */
 .content-section {
     scroll-margin-top: 130px; 
 }
 
-/* Eliminates extra trailing text margins to stop compression bugs */
 .wrapper > section > *:last-child,
 .wrapper > header > *:last-child {
     margin-bottom: 0 !important;
 }
 
-/* Automated Symmetrical Divider Engine */
 .content-section::before {
     content: "";
     position: absolute;
-    top: -70px; /* Shifted to exactly half of 140px to stay perfectly dead-centered */
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -143,16 +138,16 @@ p {
 }
 
 /* ==========================================================================
-   4. HERO SECTION (Full-Screen Cinematic Fold)
+   4. HERO SECTION
    ========================================================================== */
 .hero-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Keeps content top-aligned to visually connect with the nav */
+    justify-content: flex-start;
     text-align: center;
-    min-height: 75vh;            /* Balanced viewport height to hint at scrolling content below */
-    padding-top: 10vh;           /* Elegant, dynamic spacing from the floating dock */
+    min-height: 75vh;
+    padding-top: 10vh;
     padding-bottom: 20px;
     box-sizing: border-box;
 }
@@ -170,7 +165,6 @@ p {
     filter: drop-shadow(0 0 25px rgba(0, 255, 102, 0.9));
 }
 
-/* Symmetrical breathing cycle for the cat eye */
 @keyframes eyeGlow {
     0%, 100% {
         filter: drop-shadow(0 0 10px rgba(0, 255, 102, 0.4));
@@ -191,6 +185,48 @@ p {
     margin-top: -8px; 
     margin-bottom: 40px;
     color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   CINEMATIC HERO SHOWCASE (100% STATIC EDITION)
+   ========================================================================== */
+.hero-image-container {
+    position: relative;
+    margin-top: 44px;
+    width: 100%;
+    
+   
+    border-radius: 16px; 
+    overflow: hidden;
+    
+    
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+
+.hero-image-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg, 
+        rgba(12, 13, 16, 0.3) 0%, 
+        transparent 15%, 
+        transparent 85%, 
+        rgba(12, 13, 16, 0.4) 100%
+    );
+    pointer-events: none; 
+}
+
+.hero-showcase-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    
+   
+    filter: brightness(0.8) contrast(1.02);
 }
 
 /* ==========================================================================
@@ -392,7 +428,7 @@ p {
 }
 
 /* ==========================================================================
-   8. MISC & UTILITIES (SCROLLBAR, FOOTER)
+   8. MISC & UTILITIES
    ========================================================================== */
 ::-webkit-scrollbar {
     width: 10px;
@@ -421,7 +457,7 @@ p {
 }
 
 /* ==========================================================================
-   9. FLOATING PILL NAVIGATION DOCK (SCROLLING)
+   9. FLOATING PILL NAVIGATION DOCK
    ========================================================================== */
 .navbar {
     position: absolute;  
@@ -429,7 +465,6 @@ p {
     left: 50%;
     transform: translateX(-50%);
     
-    /* Premium Glassmorphism Specs */
     background: rgba(18, 19, 23, 0.4);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -471,7 +506,6 @@ p {
     color: var(--text-primary);
 }
 
-/* Polished Integrated Call-to-Action */
 .nav-links .nav-cta {
     color: var(--text-primary);
     background: rgba(255, 255, 255, 0.07);
@@ -495,17 +529,15 @@ p {
    10. GLOBAL RESPONSIVE MEDIA QUERIES
    ========================================================================== */
 
-/* Tier 1: Tablets & Small Laptops (e.g., iPads in Landscape/Portrait)
+/* Tier 1: Tablets & Small Laptops
    ========================================================================== */
 @media (max-width: 1024px) {
     body {
-        /* Injects the necessary side breathing room to prevent edge bleed */
         padding-left: 40px;
         padding-right: 40px;
     }
 
     .wrapper {
-        /* Maintains an elegant, spaced-out rhythm between main landing sections */
         gap: 110px; 
     }
 }
@@ -524,8 +556,6 @@ p {
     }
 
     body {
-        /* Retains your layout framework but updates side padding to 32px 
-           to keep tablet containers looking perfectly centered and framed */
         padding: 100px 32px 40px 32px;
     }
 
@@ -560,15 +590,17 @@ p {
    ========================================================================== */
 @media (max-width: 480px) {
     body {
-        /* Drops down to your original 16px padding here so text has 
-           maximum horizontal space on narrow phone screens */
         padding-left: 16px;
         padding-right: 16px;
     }
     
     .wrapper {
-        /* Snugs up layout sections beautifully for single-thumb scrolling */
         gap: 65px; 
+    }
+
+    .crew-logo {
+        width: 115px;
+        margin-bottom: 16px;
     }
     
     h1 {
@@ -577,20 +609,29 @@ p {
     
     h2 {
         font-size: 1.55rem;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 1.08rem;
+        line-height: 1.65;
+    }
+
+    .rule-card {
+        padding: 22px 18px;
+    }
+
+    .division-card {
+        padding: 24px 20px;
     }
 }
-
 
 /* ==========================================================================
    11. LINK SNAPPING TUNING
    ========================================================================== */
 #about {
-    /* Pushes the heading down into the screen's visual sweet spot ONLY when jumping via the button, 
-       keeping the actual layout spacing perfectly uniform with the rest of the site */
     scroll-margin-top: 22vh; 
 }
-
-
 
 /* ==========================================================================
    12. ENTRANCE ANIMATION ENGINE
@@ -605,6 +646,3 @@ p {
         transform: translateY(0);
     }
 }
-
-
-
