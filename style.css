@@ -4,7 +4,7 @@
 :root {
   color-scheme: dark;
 
-  --bg-main: #091b2a;
+  --bg-main: #040b1a;
   --bg-card: rgba(20, 20, 25, 0.7);
   --border-neutral: rgba(255, 255, 255, 0.05);
 
@@ -39,16 +39,30 @@ body {
   overflow-x: hidden;
   color: var(--text-primary);
   background-color: var(--bg-main);
-  background-image: radial-gradient(
-    circle,
-    rgba(170, 215, 235, 0.08) 1px,
-    transparent 1.2px
-  );
-  background-size: 28px 28px;
-  background-attachment: fixed;
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(5, 12, 28, 0.25), rgba(5, 12, 28, 0.25)),
+    radial-gradient(rgba(255, 255, 255, 0.1) 1.2px, transparent 0),
+    linear-gradient(
+      180deg,
+      rgba(6, 17, 38, 0.88) 0%,
+      rgba(4, 11, 26, 0.98) 100%
+    );
+  background-size:
+    cover,
+    32px 32px,
+    cover;
+  background-position: center top;
 }
 
 
@@ -58,9 +72,11 @@ body {
 .wrapper {
   width: 100%;
   max-width: var(--content-width);
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 140px;
+  gap: 115px;
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
@@ -74,6 +90,26 @@ body {
 
 .content-section {
   scroll-margin-top: 130px;
+}
+
+#about {
+  padding: 40px 40px 48px;
+  background: rgba(16, 39, 90, 0.27);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.28);
+  transition:
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#about:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.32);
 }
 
 .wrapper > section > *:last-child,
@@ -160,7 +196,7 @@ p {
 }
 
 .hero-tagline {
-  max-width: 580px;
+  max-width: 680px;
   margin-bottom: 32px;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.15rem;
@@ -513,7 +549,7 @@ a:focus-visible {
 .site-footer {
   margin-top: 40px;
   padding-bottom: 40px;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.42);
   font-size: 0.85rem;
   text-align: center;
 }
@@ -538,7 +574,7 @@ a:focus-visible {
   gap: 40px;
   padding: 10px 12px 10px 28px;
   transform: translateX(-50%);
-  background: rgba(18, 19, 23, 0.4);
+  background: rgba(16, 39, 90, 0.35);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 100px;
   backdrop-filter: blur(16px);
@@ -598,6 +634,10 @@ a:focus-visible {
   body {
     padding-left: 40px;
     padding-right: 40px;
+  }
+
+  #about {
+    padding: 36px 36px 40px;
   }
 
   .wrapper {
@@ -691,6 +731,16 @@ a:focus-visible {
 
   .rule-card {
     padding: 22px 18px;
+  }
+
+  #about {
+    padding: 24px 16px 28px;
+    border-radius: 16px;
+  }
+
+  #about:hover {
+    transform: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
   }
 
   .crew-card {
